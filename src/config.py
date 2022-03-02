@@ -3,8 +3,8 @@ mf_config = {'alias': 'mf_factor8neg4-implicit',
              'batch_size': 256,  # 1024
              'optimizer': 'adam',
              'adam_lr': 1e-3,
-             'num_users': 6040,
-             'num_items': 3706,
+             'num_users': 6040,  # 943
+             'num_items': 3706,  # 1682
              'latent_dim': 8,
              'num_negative': 4,
              'l2_regularization': 0, # 0.01
