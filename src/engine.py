@@ -44,7 +44,7 @@ class Engine(object):
             user, item, rating = batch[0], batch[1], batch[2]
             rating = rating.float()
             loss = self.train_single_batch(user, item, rating)
-            print('[Training Epoch {}] Batch {}, Loss {}'.format(epoch_id, batch_id, loss))
+            # print('[Training Epoch {}] Batch {}, Loss {}'.format(epoch_id, batch_id, loss))
             total_loss += loss
         self._writer.add_scalar('model/loss', total_loss, epoch_id)
 

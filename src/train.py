@@ -8,6 +8,7 @@ from neumf import NeuMFEngine
 from beta import BREngine
 from data import SampleGenerator
 from tqdm import tqdm
+import torch
 import argparse
 from config import *
 
@@ -36,6 +37,9 @@ def main(args):
     model = args.model
     print("The {} model is to be trained.".format(model))
     config = configs[model]
+    if torch.cuda.is_available():
+        config['use_cuda'] = True
+        print("use_cuda is set to be True.")
     engine = {
         'mf': MFEngine,
         'ee': EEEngine,
@@ -44,15 +48,10 @@ def main(args):
         'neumf': NeuMFEngine,
         'br': BREngine
     }[model](config)
-    # config = gmf_config
-    # engine = GMFEngine(config)
-    # config = mlp_config
-    # engine = MLPEngine(config)
-    # config = neumf_config
-    # engine = NeuMFEngine(config)
-    pbar = tqdm(range(config['num_epoch']))
-    for epoch in pbar:
-        pbar.set_description('Epoch {}'.format(epoch))
+    # pbar = tqdm(range(config['num_epoch']))
+    # for epoch in pbar:
+    for epoch in range(config['num_epoch']):
+        # pbar.set_description('Epoch {}'.format(epoch))
         # print('Epoch {} starts !'.format(epoch))
         # print('-' * 80)
         train_loader = sample_generator.instance_a_train_loader(config['num_negative'], config['batch_size'])
